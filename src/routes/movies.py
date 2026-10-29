@@ -4,7 +4,13 @@ from sqlalchemy import select, func
 
 from src.database.session import get_db
 from src.database.models import MovieModel
-from src.schemas.movies import MovieCreate, MovieUpdate, MovieResponse, MovieListResponseSchema
+from src.schemas.movies import (
+    MovieCreate,
+    MovieUpdate,
+    MovieResponse,
+    MovieListResponseSchema,
+    MovieDetailResponseSchema
+)
 
 router = APIRouter(prefix="/movies", tags=["Movies"])
 
@@ -45,7 +51,7 @@ async def get_movies(
     }
 
 
-@router.get("/{movie_id}/", response_model=MovieResponse)
+@router.get("/{movie_id}/", response_model=MovieDetailResponseSchema)
 async def get_movie(movie_id: int, db: AsyncSession = Depends(get_db)):
     movie = await db.get(MovieModel, movie_id)
     if not movie:
