@@ -51,7 +51,7 @@ class MovieListResponseSchema(BaseModel):
     movies: list[MovieResponse]
     total_items: int
     total_pages: int
-    prev_page: Optional[int] = None
-    next_page: Optional[int] = None
+    prev_page: Optional[str] = None
+    next_page: Optional[str] = None
 
     model_config = ConfigDict(from_attributes=True)
